@@ -42,7 +42,6 @@ object Duda {
         
         var src = iw.getImage()
         var output = Array.ofDim[Int](iw.height, iw.width)
-        var scores = Array.ofDim[Float](iw.height,iw.width)
         
         for (i<-2 to iw.height-3){
         for (j<-2 to iw.width-3){
@@ -58,19 +57,13 @@ object Duda {
                      
         scd2=doSum(src, List(((i+1,j+1),(i+2,j-1)),((i,j),(i+2,j-2)),((i-1,j-1),(i+1,j-2)),
              ((i+1,j+1),(i-1,j+2)), ((i,j),(i-2,j+2)),((i-1,j-1),(i-2,j+1))))
-             
-           
-        scores(i)(j)=(sch+scv+scd1+scd2)/4    
-        }}
-         
-      for (i<-0 to iw.height-1){
-      for (j<-0 to iw.width-1){
-        
-        if (scores(i)(j) > dudaThreshold)
+
+        if (((sch+scv+scd1+scd2)/4) > dudaThreshold)
           output(i)(j)=WHITE
         else 
-          output(i)(j)=BLACK
-      }}      
+          output(i)(j)=BLACK  
+
+        }}  
       
       return output
     }
